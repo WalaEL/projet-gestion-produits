@@ -1,0 +1,62 @@
+<h2>{{ titre }}</h2>
+
+<!-- Q7 : recherche -->
+<div class="row g-3 align-items-center my-3">
+  <div class="col-auto">
+    <input type="text" class="form-control" placeholder="Rechercher un produit..."
+           [(ngModel)]="filtre">
+  </div>
+  @if (filtre) {
+    <div class="col-auto text-muted">
+      Recherche active : « {{ filtre }} »
+    </div>
+  }
+</div>
+
+<table class="table table-bordered table-striped table-hover align-middle mt-3">
+  <thead class="table-primary">
+    <tr>
+      <th>
+        <button type="button" class="btn btn-sm btn-outline-primary" (click)="toggleImages()">
+          {{ afficherImages ? 'Masquer images' : 'Afficher images' }}
+        </button>
+      </th>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Prix</th>
+      <th>Quantité</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (product of filteredProducts; track product.id) {
+      <tr>
+        <td>
+          @if (afficherImages) {
+            <img [src]="product.urlImg" [alt]="product.nom" width="50" height="50"
+                 class="rounded object-fit-cover">
+          }
+        </td>
+        <td>{{ product.id }}</td>
+        <td [ngStyle]="{'color': product.quantite === 0 ? 'red' : 'green',
+                        'font-weight': product.quantite === 0 ? 'bold' : 'normal'}">
+          {{ product.nom | uppercase }}
+          <span class="badge rounded-pill" [ngClass]="product.enPromo ? 'bg-danger' : 'bg-secondary'">
+            {{ product.enPromo ? 'PROMO' : 'Standard' }}
+          </span>
+        </td>
+        <td>{{ product.prix | currency:'EUR':'symbol':'1.2-2' }}</td>
+        <td>{{ product.quantite }}</td>
+        <!-- Q9 -->
+        <td>
+          <button type="button" class="btn btn-sm btn-danger"
+                  (click)="supprimerProduit(product.id)">Supprimer</button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="6" class="text-center text-muted p-3">Aucun produit à afficher</td>
+      </tr>
+    }
+  </tbody>
+</table>
