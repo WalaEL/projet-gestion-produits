@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CurrencyPipe, NgClass, NgStyle, UpperCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { Produit } from '../models/produit';
 
 @Component({
   selector: 'app-liste-produits',
-  imports: [FormsModule, NgClass, NgStyle, CurrencyPipe, UpperCasePipe],
+  imports: [FormsModule, NgClass, NgStyle, CurrencyPipe, UpperCasePipe, RouterLink],
   templateUrl: './liste-produits.html',
   styleUrl: './liste-produits.css'
 })
@@ -22,11 +23,12 @@ export class ListeProduits {
     { id: 5, nom: 'Casque Audio Sony WH',       prix: 249.99,  quantite: 23, urlImg: 'https://picsum.photos/seed/headset/150/150',  enPromo: false }
   ];
 
+  // Q4 : afficher / masquer les images
   toggleImages(): void {
     this.afficherImages = !this.afficherImages;
   }
 
-  // Q8
+  // Q8 : filtrage en temps réel
   get filteredProducts(): Produit[] {
     if (!this.filtre) {
       return this.products;
@@ -35,7 +37,7 @@ export class ListeProduits {
     return this.products.filter(p => p.nom.toLowerCase().includes(terme));
   }
 
-  // Q9 (bonus)
+  // Q9 (bonus) : supprimer un produit
   supprimerProduit(id: number): void {
     this.products = this.products.filter(p => p.id !== id);
   }

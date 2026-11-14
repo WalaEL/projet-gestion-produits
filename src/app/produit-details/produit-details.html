@@ -1,0 +1,32 @@
+<div class="mb-3">
+  <a routerLink="/products" class="btn btn-secondary btn-sm">Retour à la liste</a>
+</div>
+
+@if (produit(); as p) {
+  <div class="card p-3">
+    <h2>Détails du produit : {{ p.nom }}</h2>
+    <p><strong>Identifiant :</strong> {{ p.id }}</p>
+    <p><strong>Prix :</strong> {{ p.prix | currency:'EUR' }}</p>
+    <p><strong>Quantité en stock :</strong> {{ p.quantite }}</p>
+    <p><strong>Statut :</strong> {{ p.enPromo ? 'En promotion' : 'Standard' }}</p>
+    <div class="my-2">
+      <img [src]="p.urlImg" [alt]="p.nom" width="120">
+    </div>
+  </div>
+      <div class="mt-3 pt-3 border-top">
+      <p class="text-muted">Navigation directe :</p>
+      <div class="btn-group">
+        <a [routerLink]="['/products', 1]" class="btn btn-outline-secondary btn-sm">Produit 1</a>
+        <a [routerLink]="['/products', 2]" class="btn btn-outline-secondary btn-sm">Produit 2</a>
+        <a [routerLink]="['/products', 3]" class="btn btn-outline-secondary btn-sm">Produit 3</a>
+      </div>
+    </div>
+} @else {
+  <div class="alert alert-warning">
+    <p>Aucun produit trouvé pour l'identifiant {{ productId() }}.</p>
+    <a routerLink="/products" class="btn btn-outline-secondary btn-sm">Retour à la liste</a>
+    <button type="button" class="btn btn-secondary btn-sm mb-3" (click)="retournerVersCatalogue()">
+  Retour à la liste (Programmation)
+</button>
+  </div>
+}

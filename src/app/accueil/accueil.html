@@ -1,0 +1,25 @@
+<div class="p-4 mb-4 bg-light rounded">
+  <h2>Bienvenue sur l'application de Gestion de Produits</h2>
+  <p>
+    Cette application permet de consulter le catalogue de produits
+    et d'accéder aux fiches détaillées.
+  </p>
+  <a routerLink="/products" class="btn btn-primary">Consulter le catalogue</a>
+</div>
+
+<div class="row">
+  <div class="col-md-6 mb-3">
+    <div class="card p-3">
+      <h4>Produits en stock</h4>
+      <p>{{ totalProduits }} articles enregistrés dans le catalogue.</p>
+      <a routerLink="/products" class="btn btn-outline-primary btn-sm">Voir la liste</a>
+    </div>
+  </div>
+  <div class="col-md-6 mb-3">
+    <div class="card p-3">
+      <h4>Offres promotionnelles</h4>
+      <p>{{ totalPromos }} articles actuellement en promotion.</p>
+      <a routerLink="/products" class="btn btn-outline-primary btn-sm">Voir les offres</a>
+    </div>
+  </div>
+</div>

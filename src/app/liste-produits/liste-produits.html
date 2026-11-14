@@ -1,6 +1,6 @@
 <h2>{{ titre }}</h2>
 
-<!-- Q7 : recherche -->
+<!-- Recherche (Q7) -->
 <div class="row g-3 align-items-center my-3">
   <div class="col-auto">
     <input type="text" class="form-control" placeholder="Rechercher un produit..."
@@ -38,19 +38,28 @@
           }
         </td>
         <td>{{ product.id }}</td>
+
+        <!-- Nom = lien vers la fiche détail (TP2 Q6) -->
         <td [ngStyle]="{'color': product.quantite === 0 ? 'red' : 'green',
                         'font-weight': product.quantite === 0 ? 'bold' : 'normal'}">
-          {{ product.nom | uppercase }}
-          <span class="badge rounded-pill" [ngClass]="product.enPromo ? 'bg-danger' : 'bg-secondary'">
+          <a [routerLink]="['/products', product.id]"
+             style="color: inherit; text-decoration: underline;">
+            {{ product.nom | uppercase }}
+          </a>
+          <span class="badge rounded-pill ms-2"
+                [ngClass]="product.enPromo ? 'bg-danger' : 'bg-secondary'">
             {{ product.enPromo ? 'PROMO' : 'Standard' }}
           </span>
         </td>
+
         <td>{{ product.prix | currency:'EUR':'symbol':'1.2-2' }}</td>
         <td>{{ product.quantite }}</td>
-        <!-- Q9 -->
+
         <td>
           <button type="button" class="btn btn-sm btn-danger"
-                  (click)="supprimerProduit(product.id)">Supprimer</button>
+                  (click)="supprimerProduit(product.id)">
+            Supprimer
+          </button>
         </td>
       </tr>
     } @empty {
